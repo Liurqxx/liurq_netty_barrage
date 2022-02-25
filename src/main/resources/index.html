@@ -148,22 +148,15 @@
             cursor: pointer;
             border: 1px solid #5bba32;
         }
-
-
         .send .s_con .s_submit:hover {
             background: #3eaf0e;
         }
-
         /*end send*/
     </style>
-
-
 </head>
 <body>
 <a href="#" id="startDm">开启弹幕</a>
-<!-- dm start -->
 <div class="dm">
-    <!-- d_screen start -->
     <div class="d_screen">
         <a href="#" class="d_del">X</a>
         <div class="d_mask"></div>
@@ -215,29 +208,19 @@
 
         $("#startDm,.d_del").click(function () {
             $("#startDm,.dm").toggle(1000);
-//init_screen();
         });
         $("#btn").click(function () {
             send();
         });
         $(".s_text").keydown(function () {
             var code = window.event.keyCode;
-
-
             if (code == 13)//回车键按下时，输出到弹幕
-
-
             {
                 send();
             }
         });
-
-
     });
-
-
     function launch() {
-
         var _height = $(window).height();
         var _left = $(window).width() - $("#" + index).width();
         var time = 10000;
