@@ -41,7 +41,7 @@ public class NettyServerStart implements ApplicationRunner {
             ChannelFuture f = b.bind(port).sync(); // (7)
 
             // 等待服务器  socket 关闭 。
-            // 在这个例子中，这不会发生，但你可以优雅地关闭你的服务器。
+            // 会阻塞，但你可以优雅地关闭你的服务器。
             f.channel().closeFuture().sync();
 
         } catch (Exception e) {

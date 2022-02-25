@@ -4,6 +4,7 @@ import io.netty.channel.*;
 import io.netty.handler.codec.http.*;
 import io.netty.handler.ssl.SslHandler;
 import io.netty.handler.stream.ChunkedNioFile;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.RandomAccessFile;
@@ -13,6 +14,7 @@ import java.net.URL;
 /**
  * 处理 Http 请求
  */
+@Slf4j
 public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
     private final String wsUri;
     private static final File INDEX;
@@ -46,7 +48,6 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
             response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html; charset=UTF-8");
 
             boolean keepAlive = HttpUtil.isKeepAlive(request);
-//            boolean keepAlive = HttpHeaders.isKeepAlive(request);
             if (keepAlive) {
                 response.headers().set(HttpHeaderNames.CONTENT_LENGTH, file.length());
                 response.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderNames.KEEP_ALIVE);
@@ -76,9 +77,8 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<FullHttpRequ
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
             throws Exception {
         Channel incoming = ctx.channel();
-        System.out.println("Client:" + incoming.remoteAddress() + "异常");
+        log.error("client:{} 异常,异常原因：{}", incoming.remoteAddress(), cause.getMessage());
         // 当出现异常就关闭连接
-        cause.printStackTrace();
         ctx.close();
     }
 }
