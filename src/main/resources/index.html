@@ -31,7 +31,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            display: none;
+            /*display: none;*/
         }
 
 
@@ -157,14 +157,15 @@
     </style>
 </head>
 <body>
-<a href="#" id="startDm">开启弹幕</a>
+<!--<a href="#" id="startDm">开启弹幕</a>-->
 <div class="dm">
     <div class="d_screen">
         <a href="#" class="d_del">X</a>
         <div class="d_mask">
-            <object width="1500" height="600" autoplay="" data="http://static.liurongqiang.com/static/a.mp4"></object>
+            <video id="video" width="100%" height="100%" autoplay="" controls="controls"
+                   src="http://static.liurongqiang.com/static/a.mp4">
+            </video>
         </div>
-
         <div class="d_show">
         </div>
     </div>
@@ -211,9 +212,9 @@
 <script type="text/javascript">
     $(function () {
 
-        $("#startDm,.d_del").click(function () {
-            $("#startDm,.dm").toggle(1000);
-        });
+        // $("#startDm,.d_del").click(function () {
+        //     $("#startDm,.dm").toggle(1000);
+        // });
         $("#btn").click(function () {
             send();
         });
